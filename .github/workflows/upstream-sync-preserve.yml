@@ -24,13 +24,13 @@ jobs:
           fetch-depth: 0
       - name: Merge upstream without overwriting fork changes
         env:
-          miantiao-me/Sink_REPO: miantiao-me/Sink
-          miantiao-me/Sink_master: UPmaster
+          UPSTREAM_REPO: miantiao-me/Sink
+          UPSTREAM_BRANCH: master
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote add upstream "https://github.com/${miantiao-me/Sink_REPO}.git" 2>/dev/null || true
-          git fetch --no-tags upstream "${miantiao-me/Sink_master}"
-          git merge --no-ff --no-edit "upstream/${miantiao-me/Sink_master}"
+          git remote add upstream "https://github.com/${UPSTREAM_REPO}.git" 2>/dev/null || true
+          git fetch --no-tags upstream "${UPSTREAM_BRANCH}"
+          git merge --no-ff --no-edit "upstream/${UPSTREAM_BRANCH}"
           git push origin HEAD:master
